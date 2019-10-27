@@ -1,0 +1,15 @@
+mat-form-field {    
+    width: 70%;
+}
+.create-user-from button {
+    display: block;
+}
+
+.create-user-from {
+    display: flex;
+    align-items: center;
+    justify-content: center 
+}
+/* .create-user-from button {
+    float: left;
+} */

@@ -1,0 +1,22 @@
+<section class="main-wrapper">
+
+    <div class="sidenav-wrapper">
+        <div class="user-name">
+            <span>Ostap Dutkevych</span>
+        </div>
+        <div class="sidenav">
+            <div class="first">
+                <a [routerLink]="['/app/main']">Main Page</a>
+                <a [routerLink]="['/app/create-user']">Create user</a>
+                <a [routerLink]="['/app/info-user']">User Info</a>
+            </div>
+            <div class="second">
+                <a [routerLink]="['/auth/login']" (click)="clearLocalStorage()">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="sidenav-content">
+        <router-outlet></router-outlet>
+    </div>
+
+</section>

@@ -1,0 +1,42 @@
+.main-wrapper {
+    display: flex;
+}
+.sidenav-wrapper {
+
+    position: relative;
+}
+
+.sidenav-wrapper .sidenav a{
+    display: block;
+    padding: 18px 21px;
+    text-align: left;
+    border: none;
+    outline: 0;
+    text-decoration: none;
+    color: #DFDBD9;
+}
+.sidenav-wrapper .sidenav a:hover{
+    background-color: #acacac!important;
+}
+.sidenav-wrapper {
+    width: 20%;
+    background-color: #3C3735;
+    height: 100vh;
+}
+.user-name span {
+    font-size: 30px;
+    font-weight: normal;
+    cursor: pointer;
+    text-shadow: 0 0 15px #999;
+    color: rgb(143, 143, 143);
+    transition: all .5s;
+    padding-left: 20px;
+}
+
+.second {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    bottom: 0;
+}
+

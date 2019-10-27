@@ -1,0 +1,30 @@
+<div class="create-user-from">
+    <form [formGroup]='userData'>
+    <mat-form-field>
+        <input matInput placeholder="Enter your firstName" formControlName="firstName" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Enter your lastName" formControlName="lastName" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Enter your userName" formControlName="userName" required>
+
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Enter your phone" formControlName="phone" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Enter your email" formControlName="email" required>
+        <mat-error
+            *ngIf="userData.controls['email'].invalid && (userData.controls['email'].dirty || userData.controls['email'].touched)">
+            <mat-error *ngIf="userData.controls['email'].errors.pattern">
+                Email is invalid!
+            </mat-error>
+            <mat-error *ngIf="userData.controls['email'].errors.required">
+                Email is reqired!
+            </mat-error>
+        </mat-error>
+    </mat-form-field>
+<button color='primary' mat-raised-button (click)="getDataUser()">Next</button>
+</form>
+</div>
