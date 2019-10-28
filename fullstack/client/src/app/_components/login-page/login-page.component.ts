@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
     if (!user) { return; }
     console.log(user);
     this.authService.loginData( user as User).subscribe(
-      res => localStorage.setItem('token',JSON.stringify(res)),
+      res => JSON.stringify(res),
       err => console.log(err, 'sds')
       );
   }

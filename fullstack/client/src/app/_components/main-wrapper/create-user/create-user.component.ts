@@ -1,26 +1,14 @@
+
+import { CreateUserService } from '../../../_services/create-user.service';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators,FormGroup } from '@angular/forms';
+import { UserCreate } from '../../../_models/userCreate';
 
-import {MatTableDataSource} from '@angular/material/table';
 
-export interface City {
+export interface Country {
   value: string;
   viewValue: string;
 }
-
-export interface PeriodicElement {
-  property: string;
-  value: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {property: 'First Name', value:'Ostap'},
-  {property: 'Last Name', value:'Vichnya'},
-  {property: 'User Name', value:'Twist'},
-  {property: 'Phone', value:'39849823742'},
-  {property: 'E-mail', value:'ostap@gmai.com'},
-
-];
 
 @Component({
   selector: 'app-create-user',
@@ -29,21 +17,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class CreateUserComponent implements OnInit {
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  displayedColumns: string[] = ['property', 'value'];
   dataAboutUser = {};
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  cities: City[] = [
-    {value: 'steak-0', viewValue: 'Poland'},
-    {value: 'pizza-1', viewValue: 'Ukraine'},
-    {value: 'tacos-2', viewValue: 'Turkey'}
+  countries: Country[] = [
+    {value: 'Poland', viewValue: 'Poland'},
+    {value: 'Ukraine', viewValue: 'Ukraine'},
+    {value: 'Turkey', viewValue: 'Turkey'}
   ];
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder,
+              private createUserService: CreateUserService
+    ) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -55,17 +43,21 @@ export class CreateUserComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
       address: ['', Validators.required],
-      city: ['', Validators.required]
+      city: ['', Validators.required],
+      country: ['', Validators.required]
     });
   }
 
-
+  saveCreateUser():void{
+    const user = this.dataAboutUser;
+    this.createUserService.createUser( user as UserCreate).subscribe(
+      res => console.log(res, 's'),
+      err => console.log(err)
+    )
+  }
 
 getDataUser(){
   this.dataAboutUser = {...this.firstFormGroup.value, ...this.secondFormGroup.value};
-  for(let prop in this.dataAboutUser){
-  }
   console.log(this.dataAboutUser);
-}
-
+  }
 }

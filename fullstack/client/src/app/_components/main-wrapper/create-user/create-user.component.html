@@ -34,11 +34,11 @@
                 <input matInput placeholder="City" formControlName="city" required>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Favorite food</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let city of cities" [value]="city.value">
-                        {{city.viewValue}}
-                    </mat-option>
+                <mat-label>Select country</mat-label>
+                <mat-select formControlName="country">
+                    <mat-option *ngFor="let country of countries" [value]="country.value">
+                        {{country.viewValue}}
+                      </mat-option>
                 </mat-select>
             </mat-form-field>
             <div>
@@ -51,26 +51,27 @@
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>All Data</ng-template>
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="value">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> value</th>
-                <td mat-cell *matCellDef="let element"> {{element.value}} </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="property">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> property </th>
-                <td mat-cell *matCellDef="let element"> {{dataAboutUser.firstName}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <mat-list >
+            <mat-list-item>Name: {{dataAboutUser.firstName}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Surname: {{dataAboutUser.lastName}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Username: {{dataAboutUser.userName}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Email: {{dataAboutUser.email}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Phone: {{dataAboutUser.phone}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Address type: {{dataAboutUser.address}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>City type: {{dataAboutUser.city}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>City type: {{dataAboutUser.country}}</mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
         <div>
             <button mat-raised-button (click)="stepper.reset()" color="accent">Cancel</button>
-            <button mat-raised-button color="primary">Save</button>
+            <button mat-raised-button color="primary" (click)="saveCreateUser()">Save</button>
         </div>
     </mat-step>
 </mat-horizontal-stepper>

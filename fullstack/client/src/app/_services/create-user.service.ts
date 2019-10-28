@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../_models/user';
+import { UserCreate } from '../_models/userCreate';
 import { catchError} from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
@@ -11,30 +11,35 @@ import { Observable, of } from 'rxjs';
 })
 export class CreateUserService {
 
-  private createUserUrl = 'http://localhost:5000/api/auth/register';
+  private createUserUrl = 'http://localhost:5000/app/save-user';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type':  'application/json'})
   };
 
   constructor(private http: HttpClient) { }
 
 
-  createData (user: User): Observable<User> {
-    return this.http.post<User>(this.createUserUrl, user, this.httpOptions).pipe(
-      // tap((newHero: User) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<User>('addHero'))
-    );
+  // createUser (user: UserCreate): Observable<UserCreate> {
+  //   return this.http.post<UserCreate>(this.createUserUrl, user, this.httpOptions).pipe(
+  //     // tap((newHero: User) => this.log(`added hero w/ id=${newHero.id}`)),
+  //     catchError(this.handleError<UserCreate>('addHero'))
+  //   );
+  // }
+  createUser (user: UserCreate): Observable<UserCreate> {
+    return this.http.post<UserCreate>(this.createUserUrl, user , this.httpOptions).pipe(
+        catchError(this.handleError('saveUser', user))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.log(error.message);
+      console.log(error.message, 'my');
 
       // this.log(${operation} failed: ${error.message});
 
-      // return of(result as T);
-      return throwError(error);
+      return of(result as T);
+      // return throwError(error);
     };
   }
 }

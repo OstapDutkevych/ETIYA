@@ -17,8 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/auth', saveRoutes);
-
+app.use('/app', saveRoutes);
 
 module.exports = app;
 
