@@ -4,7 +4,9 @@ export class UserCreate {
   userName: string;
   phone: string;
   email: string;
-  // password: string;
+  password: string;
+  confirmPassword: string;
   city: string;
+  country: string;
   address: string;
 }

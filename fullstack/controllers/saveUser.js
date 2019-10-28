@@ -9,9 +9,11 @@ const user = new SaveUser({
     userName: req.body.userName,
     phone: req.body.phone,
     email: req.body.email,
-    // password: req.body.password,
     city: req.body.city,
-    address: req.body.address
+    country: req.body.country,
+    address: req.body.address,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword,
   });
   
   try {
@@ -21,3 +23,8 @@ const user = new SaveUser({
     errorHandler(res, e);
   }
 };
+
+module.exports.getUser = async (req, res) => {
+  const candidate = await SaveUser.findOne({ email: email });
+  res.status(201).json(candidate);
+  };

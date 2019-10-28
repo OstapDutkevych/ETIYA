@@ -17,10 +17,15 @@
             <mat-form-field>
                 <input matInput placeholder="E-mail" formControlName="email" required>
             </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Password" formControlName="password" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Confirm Password" formControlName="confirmPassword" required>
+            </mat-form-field>
             <div>
-                    <!-- [disabled]="firstFormGroup.invalid" -->
                 <button mat-raised-button matStepperNext
-                    color="primary">Next</button>
+                    color="primary" [disabled]="firstFormGroup.invalid">Next</button>
             </div>
         </form>
     </mat-step>
@@ -42,10 +47,9 @@
                 </mat-select>
             </mat-form-field>
             <div>
-                <!-- [disabled]="secondFormGroup.invalid" -->
                 <button mat-raised-button matStepperPrevious color="accent">Back</button>
                 <button mat-raised-button matStepperNext (click)="getDataUser()"
-                    color="primary">Next</button>
+                    color="primary" [disabled]="secondFormGroup.invalid">Next</button>
             </div>
         </form>
     </mat-step>
@@ -70,6 +74,7 @@
             <mat-divider></mat-divider>
         </mat-list>
         <div>
+            <button mat-raised-button matStepperPrevious color="accent">Back</button>
             <button mat-raised-button (click)="stepper.reset()" color="accent">Cancel</button>
             <button mat-raised-button color="primary" (click)="saveCreateUser()">Save</button>
         </div>

@@ -1,8 +1,9 @@
 
 import { CreateUserService } from '../../../_services/create-user.service';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators,FormGroup } from '@angular/forms';
+import {FormBuilder, Validators,FormGroup, FormControl } from '@angular/forms';
 import { UserCreate } from '../../../_models/userCreate';
+import { Router } from '@angular/router';
 
 
 export interface Country {
@@ -30,16 +31,20 @@ export class CreateUserComponent implements OnInit {
   ];
 
   constructor(private _formBuilder: FormBuilder,
-              private createUserService: CreateUserService
+              private createUserService: CreateUserService,
+              private router: Router
     ) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstName: ['', Validators.required],
+      firstName: new FormControl('', Validators.required),
       lastName: ['', Validators.required],
       userName: ['', Validators.required],
       phone: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['',Validators.required]
+
     });
     this.secondFormGroup = this._formBuilder.group({
       address: ['', Validators.required],
@@ -51,7 +56,13 @@ export class CreateUserComponent implements OnInit {
   saveCreateUser():void{
     const user = this.dataAboutUser;
     this.createUserService.createUser( user as UserCreate).subscribe(
-      res => console.log(res, 's'),
+      user => {
+        if (user) {
+          this.firstFormGroup.reset();
+          this.secondFormGroup.reset();
+          this.router.navigate(['/app/main']);
+        }
+      },
       err => console.log(err)
     )
   }

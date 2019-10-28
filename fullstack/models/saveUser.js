@@ -20,11 +20,18 @@ const userSchema = new Schema({
                 required: true,
                 unique: true
         },
-        // password: {
-        //         type: String,
-        //         required: true
-        // },
+        password: {
+                type: String,
+                required: true
+        },
+        confirmPassword : {
+            type: String,
+            required: true
+        },
         city :{
+            type: String
+        },
+        country : {
             type: String
         },
         address : {
