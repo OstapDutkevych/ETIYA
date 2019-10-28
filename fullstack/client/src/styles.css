@@ -2,3 +2,13 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-step-header .mat-horizontal-stepper-header .mat-step-header .ng-tns-c4-0 .ng-star-inserted{
+    display: none;
+    overflow: hidden;
+    outline: 0;
+    cursor: pointer;
+    position: relative;
+    box-sizing: content-box;
+    -webkit-tap-highlight-color: transparent;
+}

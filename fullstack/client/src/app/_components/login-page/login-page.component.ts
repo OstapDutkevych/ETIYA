@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
 import { User } from '../../_models/user';
@@ -13,7 +14,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -27,8 +29,10 @@ export class LoginPageComponent implements OnInit {
     const user = this.loginData.value;
     if (!user) { return; }
     console.log(user);
-    this.authService.loginData( user as User).subscribe(res => localStorage.setItem('token',JSON.stringify(res)));
-    ;
+    this.authService.loginData( user as User).subscribe(
+      res => localStorage.setItem('token',JSON.stringify(res)),
+      err => console.log(err, 'sds')
+      );
   }
 
 }

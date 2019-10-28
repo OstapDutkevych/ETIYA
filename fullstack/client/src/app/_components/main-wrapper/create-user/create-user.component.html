@@ -1,30 +1,76 @@
-<div class="create-user-from">
-    <form [formGroup]='userData'>
-    <mat-form-field>
-        <input matInput placeholder="Enter your firstName" formControlName="firstName" required>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Enter your lastName" formControlName="lastName" required>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Enter your userName" formControlName="userName" required>
+<mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <mat-form-field>
+                <input matInput placeholder="First Name" formControlName="firstName" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" formControlName="lastName" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="User Name" formControlName="userName" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Phone" formControlName="phone" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="E-mail" formControlName="email" required>
+            </mat-form-field>
+            <div>
+                    <!-- [disabled]="firstFormGroup.invalid" -->
+                <button mat-raised-button matStepperNext
+                    color="primary">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field>
+                <input matInput placeholder="Address" formControlName="address" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="City" formControlName="city" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Favorite food</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let city of cities" [value]="city.value">
+                        {{city.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <!-- [disabled]="secondFormGroup.invalid" -->
+                <button mat-raised-button matStepperPrevious color="accent">Back</button>
+                <button mat-raised-button matStepperNext (click)="getDataUser()"
+                    color="primary">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>All Data</ng-template>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Enter your phone" formControlName="phone" required>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Enter your email" formControlName="email" required>
-        <mat-error
-            *ngIf="userData.controls['email'].invalid && (userData.controls['email'].dirty || userData.controls['email'].touched)">
-            <mat-error *ngIf="userData.controls['email'].errors.pattern">
-                Email is invalid!
-            </mat-error>
-            <mat-error *ngIf="userData.controls['email'].errors.required">
-                Email is reqired!
-            </mat-error>
-        </mat-error>
-    </mat-form-field>
-<button color='primary' mat-raised-button (click)="getDataUser()">Next</button>
-</form>
-</div>
+            <!-- Position Column -->
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> value</th>
+                <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="property">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> property </th>
+                <td mat-cell *matCellDef="let element"> {{dataAboutUser.firstName}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div>
+            <button mat-raised-button (click)="stepper.reset()" color="accent">Cancel</button>
+            <button mat-raised-button color="primary">Save</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

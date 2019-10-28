@@ -1,5 +1,5 @@
 mat-form-field {    
-    width: 70%;
+    width: 60%;
 }
 .create-user-from button {
     display: block;
@@ -10,6 +10,13 @@ mat-form-field {
     align-items: center;
     justify-content: center 
 }
-/* .create-user-from button {
-    float: left;
-} */
+
+
+.mat-step-header {
+    display: none;
+    border: 1px solid green;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}

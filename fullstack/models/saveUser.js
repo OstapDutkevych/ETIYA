@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const saveUser = new Schema({
         id: {
                 type: Number
         },
@@ -26,7 +26,13 @@ const userSchema = new Schema({
         password: {
                 type: String,
                 required: true
+        },
+        city :{
+            type: String
+        },
+        address : {
+            type: String
         }
 })
 
-module.exports = mongoose.model('UserCreate', userSchema);
+module.exports = mongoose.model('saveUser', saveUser);

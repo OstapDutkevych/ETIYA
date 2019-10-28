@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const authRoutes = require('./routes/auth');
+const saveRoutes = require('./routes/saveUser');
 const connectDB = require('./helpers/database');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/auth', saveRoutes);
 
 
 module.exports = app;

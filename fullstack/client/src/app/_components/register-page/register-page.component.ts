@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 import {FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
 import { User } from '../../_models/user';
@@ -15,6 +16,7 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
