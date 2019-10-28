@@ -6,7 +6,7 @@ const saveUser = new Schema({
         id: {
                 type: Number
         },
-        firsName: {
+        firstName: {
             type: String
         },
         lastName: {

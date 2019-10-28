@@ -13,12 +13,11 @@ const user = new SaveUser({
     email: req.body.email,
     password: req.body.password,
     city: req.body.city,
-    addres: req.body.addres
+    address: req.body.address
   });
   console.log('asd')
   try {
-    // await user.save();
-    db.saveUser.save();
+    await user.save();
     res.status(201).json(user);
   } catch (e) {
     errorHandler(res, e);
