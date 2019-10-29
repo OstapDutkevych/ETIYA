@@ -22,7 +22,6 @@ export interface Country {
   styleUrls: ["./create-user.component.css"]
 })
 export class CreateUserComponent implements OnInit {
-  [x: string]: any;
 
   dataAboutUser = {};
 
