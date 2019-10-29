@@ -1,20 +1,3 @@
-.user-form {
+  table {
     width: 100%;
-    margin: 0 auto;
-}
-.info-user-form {
-    width: 100%;
-    margin: 0 auto;
-}
-.first-row {
-    display: flex;
-}
-.first-row .example-full-width {
-    width:46vh;
-    padding-left: 20px;
-  }
-
-  .second-row .example-full-width {
-    width: 30%;
-    padding-left: 20px;
   }

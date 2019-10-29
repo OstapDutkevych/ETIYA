@@ -3,29 +3,93 @@
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Fill out your name</ng-template>
             <mat-form-field>
-                <input matInput placeholder="First Name" formControlName="firstName" required>
+                <input matInput formControlName="firstName" name="firstName" type="text" placeholder="firstName"
+                    required>
+                <mat-error
+                    *ngIf="firstFormGroup.controls['firstName'].invalid && (firstFormGroup.controls['firstName'].dirty || firstFormGroup.controls['firstName'].touched)">
+                    <mat-error *ngIf="firstFormGroup.controls['firstName'].errors.required">
+                        Name is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls['firstName'].errors.minlength">
+                        Name is too short!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Last Name" formControlName="lastName" required>
+                <mat-error
+                    *ngIf="firstFormGroup.controls['lastName'].invalid && (firstFormGroup.controls['lastName'].dirty || firstFormGroup.controls['lastName'].touched)">
+                    <mat-error *ngIf="firstFormGroup.controls['lastName'].errors.required">
+                        Surname is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls['lastName'].errors.minlength">
+                        Surname is too short!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="User Name" formControlName="userName" required>
+                <mat-error
+                    *ngIf="firstFormGroup.controls['userName'].invalid && (firstFormGroup.controls['userName'].dirty || firstFormGroup.controls['userName'].touched)">
+                    <mat-error *ngIf="firstFormGroup.controls['userName'].errors.required">
+                        Username is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls['userName'].errors.minlength">
+                        Username is too short!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Phone" formControlName="phone" required>
+                <mat-error
+                    *ngIf="firstFormGroup.controls['phone'].invalid && (firstFormGroup.controls['phone'].dirty || firstFormGroup.controls['phone'].touched)">
+                    <mat-error *ngIf="firstFormGroup.controls['phone'].errors.required">
+                        Phone is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls['phone'].errors.minlength">
+                        Phone is too short!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="E-mail" formControlName="email" required>
+                <mat-error
+                    *ngIf="firstFormGroup.controls['email'].invalid && (firstFormGroup.controls['email'].dirty || firstFormGroup.controls['email'].touched)">
+                    <mat-error *ngIf="firstFormGroup.controls['email'].errors.required">
+                        Email is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls['email'].errors.pattern">
+                        Email is invalid!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Password" formControlName="password" required>
+                <mat-error
+                    *ngIf="firstFormGroup.controls['password'].invalid && (firstFormGroup.controls['password'].dirty || firstFormGroup.controls['password'].touched)">
+                    <mat-error *ngIf="firstFormGroup.controls['password'].errors.required">
+                        Password is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls['password'].errors.minlength">
+                        Password is too short!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Confirm Password" formControlName="confirmPassword" required>
+                <mat-error
+                    *ngIf="firstFormGroup.controls['confirmPassword'].invalid && (firstFormGroup.controls['confirmPassword'].dirty || firstFormGroup.controls['confirmPassword'].touched)">
+                    <mat-error *ngIf="firstFormGroup.controls['confirmPassword'].errors.required">
+                        Password is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="firstFormGroup.controls['confirmPassword'].errors.mustMatch">
+                        Password is not match!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <div>
-                <button mat-raised-button matStepperNext
-                    color="primary" [disabled]="firstFormGroup.invalid">Next</button>
+                <button mat-raised-button matStepperNext color="primary"
+                    [disabled]="firstFormGroup.invalid">Next</button>
             </div>
         </form>
     </mat-step>
@@ -34,28 +98,46 @@
             <ng-template matStepLabel>Fill out your address</ng-template>
             <mat-form-field>
                 <input matInput placeholder="Address" formControlName="address" required>
+                <mat-error
+                    *ngIf="secondFormGroup.controls['address'].invalid && (secondFormGroup.controls['address'].dirty || secondFormGroup.controls['address'].touched)">
+                    <mat-error *ngIf="secondFormGroup.controls['address'].errors.required">
+                        Surname is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="secondFormGroup.controls['address'].errors.minlength">
+                        Surname is too short!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="City" formControlName="city" required>
+                <mat-error
+                    *ngIf="secondFormGroup.controls['city'].invalid && (secondFormGroup.controls['city'].dirty || secondFormGroup.controls['city'].touched)">
+                    <mat-error *ngIf="secondFormGroup.controls['city'].errors.required">
+                        Surname is reqired!
+                    </mat-error>
+                    <mat-error *ngIf="secondFormGroup.controls['city'].errors.minlength">
+                        Surname is too short!
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Select country</mat-label>
                 <mat-select formControlName="country">
                     <mat-option *ngFor="let country of countries" [value]="country.value">
                         {{country.viewValue}}
-                      </mat-option>
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
             <div>
                 <button mat-raised-button matStepperPrevious color="accent">Back</button>
-                <button mat-raised-button matStepperNext (click)="getDataUser()"
-                    color="primary" [disabled]="secondFormGroup.invalid">Next</button>
+                <button mat-raised-button matStepperNext (click)="getDataUser()" color="primary"
+                    [disabled]="secondFormGroup.invalid">Next</button>
             </div>
         </form>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>All Data</ng-template>
-        <mat-list >
+        <mat-list>
             <mat-list-item>Name: {{dataAboutUser.firstName}}</mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item>Surname: {{dataAboutUser.lastName}}</mat-list-item>

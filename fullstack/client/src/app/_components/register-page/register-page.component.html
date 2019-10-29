@@ -1,39 +1,40 @@
 <section class="wrapper-form">
-        <form [formGroup]='registerData'>
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>Register</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-form-field>
-                        <input matInput placeholder="Enter your email" formControlName="email" required>
-                        <mat-error
-                            *ngIf="registerData.controls['email'].invalid && (registerData.controls['email'].dirty || registerData.controls['email'].touched)">
-                            <mat-error *ngIf="registerData.controls['email'].errors.pattern">
-                                Email is invalid!
-                            </mat-error>
-                            <mat-error *ngIf="registerData.controls['email'].errors.required">
-                                Email is reqired!
-                            </mat-error>
+    <form [formGroup]='registerData'>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>Register</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field>
+                    <input matInput placeholder="Enter your email" formControlName="email" required>
+                    <mat-error
+                        *ngIf="registerData.controls['email'].invalid && (registerData.controls['email'].dirty || registerData.controls['email'].touched)">
+                        <mat-error *ngIf="registerData.controls['email'].errors.pattern">
+                            Email is invalid!
                         </mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="Enter your password" formControlName="password" required>
-                        <mat-error
-                            *ngIf="registerData.controls['password'].invalid && (registerData.controls['password'].dirty || registerData.controls['password'].touched)">
-                            <mat-error *ngIf="registerData.controls['password'].errors.pattern">
-                                password is invalid!
-                            </mat-error>
-                            <mat-error *ngIf="registerData.controls['password'].errors.required">
-                                password is reqired!
-                            </mat-error>
+                        <mat-error *ngIf="registerData.controls['email'].errors.required">
+                            Email is reqired!
                         </mat-error>
-                    </mat-form-field>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-raised-button color='primary' (click)="createUser()">Register</button>
-                    <a [routerLink]="['/auth/login']">Login</a>
-                </mat-card-actions>
-            </mat-card>
-        </form>
-    </section>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Enter your password" formControlName="password" required>
+                    <mat-error
+                        *ngIf="registerData.controls['password'].invalid && (registerData.controls['password'].dirty || registerData.controls['password'].touched)">
+                        <mat-error *ngIf="registerData.controls['password'].errors.pattern">
+                            password is invalid!
+                        </mat-error>
+                        <mat-error *ngIf="registerData.controls['password'].errors.required">
+                            password is reqired!
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color='primary' (click)="createUser()"
+                    [disabled]="registerData.invalid">Register</button>
+                <a [routerLink]="['/auth/login']">Login</a>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</section>

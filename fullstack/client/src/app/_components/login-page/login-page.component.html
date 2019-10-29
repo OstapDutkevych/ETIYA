@@ -4,9 +4,10 @@
             <mat-card-header>
                 <mat-card-title>Login</mat-card-title>
             </mat-card-header>
+            <div *ngIf="error">{{error}}</div>
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput placeholder="Enter your email" formControlName="email" required>
+                    <input matInput placeholder="Enter your email" formControlName="email" name="email" required>
                     <mat-error
                         *ngIf="loginData.controls['email'].invalid && (loginData.controls['email'].dirty || loginData.controls['email'].touched)">
                         <mat-error *ngIf="loginData.controls['email'].errors.pattern">
@@ -31,7 +32,7 @@
                 </mat-form-field>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color='primary' (click)=loginUser()>Login</button>
+                <button mat-raised-button color='primary' (click)='loginUser()' [disabled]="loginData.invalid">Login</button>
                 <a [routerLink]="['/auth/register']">You dont register?</a>
             </mat-card-actions>
         </mat-card>

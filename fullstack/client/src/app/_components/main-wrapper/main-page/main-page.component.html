@@ -1,7 +1,6 @@
-<ng-container *ngIf="users.length">
-    <mat-list-item>Created users: {{users.length}}</mat-list-item>
+<ng-container>
     <mat-list *ngFor="let user of users">
-        <mat-list-item>User name: {{user.firstName}}</mat-list-item>
+        <mat-list-item>User {{user.firstName + ' ' + user.lastName}} </mat-list-item>
         <mat-divider></mat-divider>
     </mat-list>
 </ng-container>

@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {FormBuilder, Validators,FormGroup } from '@angular/forms';
-import { AuthService } from '../../_services/auth.service';
-import { User } from '../../_models/user';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { AuthService } from "../../_services/auth.service";
+import { User } from "../../_models/user";
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  selector: "app-login-page",
+  templateUrl: "./login-page.component.html",
+  styleUrls: ["./login-page.component.css"]
 })
 export class LoginPageComponent implements OnInit {
-
   loginData: FormGroup;
-
+  error;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -20,20 +19,27 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     this.loginData = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
-      password: ['', Validators.required ]
+      email: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+        ])
+      ],
+      password: ["", Validators.required]
     });
   }
 
-  loginUser():void{
+  loginUser(): void {
     const user = this.loginData.value;
-    if (!user) { return; }
-    console.log(user);
-    this.authService.loginData( user as User).subscribe(
-      res => JSON.stringify(res),
-      err => console.log(err, 'sds')
-      );
+    if (!user) {
+      return;
+    }
+    this.authService.loginData(user as User).subscribe(
+      res => {
+        JSON.stringify(res), this.router.navigate(["/app/main"]);
+      },
+      err => (this.error = err.message)
+    );
   }
-
 }
-

@@ -1,9 +1,8 @@
 const SaveUser = require("../models/saveUser");
 const errorHandler = require("../utils/errorHandler");
-
+var ObjectId = require("mongodb").ObjectID;
 module.exports.saveUser = async (req, res) => {
-    
-const user = new SaveUser({
+  const user = new SaveUser({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     userName: req.body.userName,
@@ -13,9 +12,9 @@ const user = new SaveUser({
     country: req.body.country,
     address: req.body.address,
     password: req.body.password,
-    confirmPassword: req.body.confirmPassword,
+    confirmPassword: req.body.confirmPassword
   });
-  
+
   try {
     await user.save();
     res.status(201).json(user);
@@ -25,6 +24,14 @@ const user = new SaveUser({
 };
 
 module.exports.getUser = async (req, res) => {
-  const candidate = await SaveUser.findOne({ email: email });
-  res.status(201).json(candidate);
-  };
+  await SaveUser.find((err, data) => {
+    res.send(data);
+  });
+};
+
+module.exports.deleteUser = async (req, res) => {
+  SaveUser.findByIdAndRemove(req.params.id,(err, data) => {
+    if(err) res.json(err);
+    else res.json('Successfully removed');
+  });
+}

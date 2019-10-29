@@ -1,4 +1,5 @@
-export class UserCreate { 
+export class UserCreate {
+  _id: number;
   firstName: string;
   lastName: string;
   userName: string;

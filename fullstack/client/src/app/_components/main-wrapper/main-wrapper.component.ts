@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-main-wrapper',
-  templateUrl: './main-wrapper.component.html',
-  styleUrls: ['./main-wrapper.component.css']
+  selector: "app-main-wrapper",
+  templateUrl: "./main-wrapper.component.html",
+  styleUrls: ["./main-wrapper.component.css"]
 })
 export class MainWrapperComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  clearLocalStorage(){
+  clearLocalStorage() {
     window.localStorage.removeItem("token");
   }
-
 }
