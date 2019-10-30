@@ -1,6 +1,9 @@
-<div ng-app="myApp" ng-controller="charactersCtrl">
-    <input mat-input [(ngModel)]="searchText" placeholder="Search user by surname">
-    <table mat-table [dataSource]="users | filter : searchText" class="mat-elevation-z8" *ngIf="users">
+<!-- <div ng-app="myApp" ng-controller="charactersCtrl">
+    <ng-template matStepLabel>Fill out your name</ng-template>
+        <input matInput name="firstName" type="text" placeholder="firstName" [(ngModel)]="firstname" (input)="Search()" required>
+        <input matInput name="firstName" type="text" placeholder="firstName" [(ngModel)]="lastName" required>
+        {{firstname}} {{lastName}}
+    <table mat-table [dataSource]="users" class="mat-elevation-z8" *ngIf="users" class="w-100">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
@@ -25,9 +28,65 @@
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let user">
                 <button mat-stroked-button color="warn" (click)="deleteUser(user)">Delete</button>
+                <button mat-stroked-button color="warn" (click)="updateUser(user)">Update</button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</div>
+</div> -->
+
+<form [formGroup]="form">
+        <mat-form-field>
+            <input matInput formControlName="firstName" name="firstName" type="text" placeholder="First Name" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="lastName" placeholder="Last Name" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="userName" placeholder="User Name" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="phone" placeholder="Phone" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="email" placeholder="E-mail" required>
+        </mat-form-field>
+    <button mat-raised-button color="primary">Clear</button>
+    <button mat-raised-button color="primary" >Find</button>
+</form>
+
+<div class="mytable">
+    <table mat-table [dataSource]="users" class="mat-elevation-z8" *ngIf="users" class="w-100">
+        <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> User Name </th>
+            <td mat-cell *matCellDef="let user"> {{user.userName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Phone </th>
+            <td mat-cell *matCellDef="let user"> {{user.phone}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let user">
+                <button mat-stroked-button color="warn" (click)="deleteUser(user)">Delete</button>
+                <button mat-stroked-button color="warn" (click)="updateUser(user)">Update</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
+

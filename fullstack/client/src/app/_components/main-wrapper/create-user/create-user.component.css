@@ -20,7 +20,3 @@ mat-form-field {
 ::ng-deep .mat-horizontal-stepper-header{
     pointer-events: none !important;
 }
-
-button {
-    padding-left: 20px;
-}

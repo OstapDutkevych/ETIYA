@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-
+import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { UserCreate } from "../../../_models/userCreate";
 import { UserService } from "../../../_services/user.service";
 
@@ -10,29 +10,42 @@ import { UserService } from "../../../_services/user.service";
   styleUrls: ["./user-info.component.css"]
 })
 export class UserInfoComponent implements OnInit {
+  form: FormGroup;
+  searchText: string = "";
+
+  users: UserCreate[] = [];
+  firstname: string;
+
   displayedColumns = [
-    "name",
-    "surname",
+    "firstname",
+    "lastname",
     "username",
     "email",
     "phone",
     "actions"
   ];
-  users: UserCreate[] = [];
-  characters = [
-    "Finn the human",
-    "Jake the dog",
-    "Princess bubblegum",
-    "Lumpy Space Princess",
-    "Beemo1",
-    "Beemo2"
-  ];
 
-  constructor(private userService: UserService, private http: HttpClient) {}
+  constructor(
+    private userService: UserService,
+    private http: HttpClient,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
+    this.buildForm();
     this.getUsers();
   }
+
+  buildForm(): void {
+    this.form = this.fb.group({
+      firstName: new FormControl(""),
+      lastName: new FormControl(""),
+      userName: new FormControl(""),
+      phone: new FormControl(""),
+      email: new FormControl("")
+    });
+  }
+
   getUsers() {
     this.userService
       .getUsers()

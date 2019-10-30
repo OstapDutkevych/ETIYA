@@ -2,7 +2,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppMaterialModule } from "./material.module";
+import { MatDialogModule } from '@angular/material';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "../app/app.component";
@@ -14,7 +16,6 @@ import { LoginPageComponent } from "./_components/login-page/login-page.componen
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RegisterPageComponent } from "./_components/register-page/register-page.component";
 
-import { FilterPipe } from "./_components/main-wrapper/user-info/filter.pipe";
 
 @NgModule({
   declarations: [
@@ -25,16 +26,17 @@ import { FilterPipe } from "./_components/main-wrapper/user-info/filter.pipe";
     MainPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    FilterPipe
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

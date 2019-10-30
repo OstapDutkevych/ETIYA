@@ -5,6 +5,7 @@ import { MainWrapperComponent } from "./_components/main-wrapper/main-wrapper.co
 import { MainPageComponent } from "./_components/main-wrapper/main-page/main-page.component";
 import { CreateUserComponent } from "./_components/main-wrapper/create-user/create-user.component";
 import { UserInfoComponent } from "./_components/main-wrapper/user-info/user-info.component";
+// import { UserComponent } from "./"
 import { RegisterPageComponent } from "./_components/register-page/register-page.component";
 
 const routes: Routes = [

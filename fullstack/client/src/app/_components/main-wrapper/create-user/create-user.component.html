@@ -64,7 +64,7 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Password" formControlName="password" required>
+                <input matInput type="password" placeholder="Password" formControlName="password" required>
                 <mat-error
                     *ngIf="firstFormGroup.controls['password'].invalid && (firstFormGroup.controls['password'].dirty || firstFormGroup.controls['password'].touched)">
                     <mat-error *ngIf="firstFormGroup.controls['password'].errors.required">
@@ -76,7 +76,7 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Confirm Password" formControlName="confirmPassword" required>
+                <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" required>
                 <mat-error
                     *ngIf="firstFormGroup.controls['confirmPassword'].invalid && (firstFormGroup.controls['confirmPassword'].dirty || firstFormGroup.controls['confirmPassword'].touched)">
                     <mat-error *ngIf="firstFormGroup.controls['confirmPassword'].errors.required">
@@ -123,8 +123,8 @@
             <mat-form-field>
                 <mat-label>Select country</mat-label>
                 <mat-select formControlName="country">
-                    <mat-option *ngFor="let country of countries" [value]="country.value">
-                        {{country.viewValue}}
+                    <mat-option *ngFor="let country of countries" [value]="country.name">
+                        {{country.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

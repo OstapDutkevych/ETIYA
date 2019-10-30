@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable, of,Subject } from "rxjs";
 import { UserCreate } from "../_models/userCreate";
 import { catchError, tap } from "rxjs/operators";
 
@@ -10,6 +10,8 @@ import { catchError, tap } from "rxjs/operators";
 export class UserService {
   private userUrl = "http://localhost:5000/app/main";
   private deleteUserUrl = "http://localhost:5000/app/";
+
+
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
