@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Favorite Animal</h1>
+<div mat-dialog-content>
+  <form action="" [formGroup]="popupGroup">
+    <div class="popupInput">
+      <mat-form-field>
+        <input matInput formControlName="firstName" placeholder="First Name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="lastName" placeholder="Last Name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="userName" placeholder="User Name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="phone" placeholder="Phone" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="email" required>
+      </mat-form-field>
+    </div>
+  </form>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="updateUser()">Update User</button>
+
+</div>

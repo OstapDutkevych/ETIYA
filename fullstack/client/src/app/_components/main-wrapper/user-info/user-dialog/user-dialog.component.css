@@ -1,0 +1,12 @@
+.popupInput input{
+    display: block;
+}
+.popupInput {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mat-dialog-content {
+    width: 350px;
+}

@@ -3,6 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { UserCreate } from "../../../_models/userCreate";
 import { UserService } from "../../../_services/user.service";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { UserDialogComponent } from '../user-info/user-dialog/user-dialog.component';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: "app-user-info",
@@ -13,6 +16,7 @@ export class UserInfoComponent implements OnInit {
   form: FormGroup;
   searchText: string = "";
 
+  // bollean = false;
   users: UserCreate[] = [];
   firstname: string;
 
@@ -28,7 +32,8 @@ export class UserInfoComponent implements OnInit {
   constructor(
     private userService: UserService,
     private http: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -56,4 +61,22 @@ export class UserInfoComponent implements OnInit {
     this.users = this.users.filter(h => h !== user);
     this.userService.deleteUser(user).subscribe(res => res, error => error);
   }
-}
+  openDialog(user: UserCreate) {
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      data: {
+        user: user
+      }
+    });
+    console.log(user)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result, 'The dialog was closed');
+    });
+  }
+  // findItem(...arg){
+  //   for( let item in arg){
+  //     if(arg[item]){
+  //       this.bollean = true;
+  //     }
+  //     }
+  //   }
+  }
