@@ -5,7 +5,10 @@
 
     position: relative;
 }
-
+.sidenav-content {
+    width: 100%;
+    padding: 1em;
+}
 .sidenav-wrapper .sidenav a{
     display: block;
     padding: 18px 21px;

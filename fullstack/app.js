@@ -9,12 +9,13 @@ const connectDB = require('./helpers/database');
 
 const app = express();
 
-connectDB();
+connectDB()
 
 app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 
 app.use('/api/auth', authRoutes);
 app.use('/app', saveRoutes);

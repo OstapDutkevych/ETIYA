@@ -11,10 +11,14 @@ import { Countries } from "../../../_models/country";
 import { Router } from "@angular/router";
 
 import { MustMatch } from "../../../helpers/must-match.validator";
+import { Addresses } from 'src/app/_models/userAddresses';
 
 export interface Country {
   value: string;
   viewValue: string;
+}
+export interface addressType {
+  value: string;
 }
 
 @Component({
@@ -25,9 +29,15 @@ export interface Country {
 export class CreateUserComponent implements OnInit {
   countries: Countries[];
   dataAboutUser = {};
-
+  user: UserCreate;
+  users: UserCreate[] = [];
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  addressTypes: addressType[] = [
+    { value: "Billing Address" },
+    { value: "Shipment Address" },
+    { value: "Home Address" }
+  ];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -36,14 +46,13 @@ export class CreateUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.getCountry();
     (this.firstFormGroup = this._formBuilder.group(
       {
         firstName: new FormControl("", [
           Validators.required,
           Validators.minLength(2),
-          Validators.pattern("^[A-Z|a-z|]{3,15}$"),
+          Validators.pattern("^[A-Z|a-z|]{3,15}$")
         ]),
         lastName: new FormControl("", [
           Validators.required,
@@ -58,12 +67,13 @@ export class CreateUserComponent implements OnInit {
         phone: new FormControl("", [
           Validators.required,
           Validators.minLength(4),
-          Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$")
+          Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$")
         ]),
         email: new FormControl("", [
           Validators.required,
           Validators.pattern(
-            "^([A-Z|a-z|0-9](.|_){0,1})+[A-Z|a-z|0-9]@([A-Z|a-z|0-9])+((.){0,1}[A-Z|a-z|0-9]){2}.[a-z]{2,3}$")
+            "^([A-Z|a-z|0-9](.|_){0,1})+[A-Z|a-z|0-9]@([A-Z|a-z|0-9])+((.){0,1}[A-Z|a-z|0-9]){2}.[a-z]{2,3}$"
+          )
         ]),
         password: new FormControl("", [
           Validators.required,
@@ -74,6 +84,8 @@ export class CreateUserComponent implements OnInit {
       { validator: MustMatch("password", "confirmPassword") }
     )),
       (this.secondFormGroup = this._formBuilder.group({
+        id: new FormControl(0),
+        addressType: new FormControl("", [Validators.required]),
         address: new FormControl("", [
           Validators.required,
           Validators.minLength(4)
@@ -87,8 +99,20 @@ export class CreateUserComponent implements OnInit {
   }
 
   saveCreateUser(): void {
-    const user = this.dataAboutUser;
-    this.createUserService.createUser(user as UserCreate).subscribe(
+    const addresses: Addresses[] = [];
+    addresses.push(this.secondFormGroup.value);
+    // this.user = this.dataAboutUser;
+    // console.log(this.dataAboutUser)
+    // this.user.addresses[0].id = this.secondFormGroup.value.id;
+    // console.log(this.user.addresses[0].id)
+    // const test12 = this.user.addresses[0].id
+    // console.log(this.secondFormGroup.value.id)
+    this.dataAboutUser = {
+      ...this.firstFormGroup.value,
+      addresses
+    };
+    console.log(this.dataAboutUser)
+    this.createUserService.createUser(this.dataAboutUser as UserCreate).subscribe(
       user => {
         if (user) {
           this.firstFormGroup.reset();
@@ -99,16 +123,10 @@ export class CreateUserComponent implements OnInit {
       err => err
     );
   }
-  getCountry():void{
-   this.createUserService.getCountries().subscribe(
-      countries => this.countries = countries,
-      err => err
-    )
+  getCountry(): void {
+    this.createUserService
+      .getCountries()
+      .subscribe(countries => (this.countries = countries), err => err);
   }
-  getDataUser() {
-    this.dataAboutUser = {
-      ...this.firstFormGroup.value,
-      ...this.secondFormGroup.value
-    };
-  }
+
 }

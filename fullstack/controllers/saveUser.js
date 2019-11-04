@@ -8,13 +8,21 @@ module.exports.saveUser = async (req, res) => {
     userName: req.body.userName,
     phone: req.body.phone,
     email: req.body.email,
-    city: req.body.city,
-    country: req.body.country,
-    address: req.body.address,
+    addresses: [
+      {
+        addressType: req.body.addressType,
+        country: req.body.country,
+        city: req.body.city,
+        address: req.body.address
+      }
+    ],
+    // city: req.body.city,
+    // country: req.body.country,
+    // address: req.body.address,
     password: req.body.password,
     confirmPassword: req.body.confirmPassword
   });
-
+  console.log(user);
   try {
     await user.save();
     res.status(201).json(user);
@@ -30,8 +38,15 @@ module.exports.getUser = async (req, res) => {
 };
 
 module.exports.deleteUser = async (req, res) => {
-  SaveUser.findByIdAndRemove(req.params.id,(err, data) => {
-    if(err) res.json(err);
-    else res.json('Successfully removed');
+  await SaveUser.findByIdAndRemove(req.params.id, (err, data) => {
+    if (err) res.json(err);
+    else res.json("Successfully removed");
+  });
+};
+
+module.exports.updateUser = async (req, res) => {
+  await SaveUser.findByIdAndUpdate(req.params.id,{$set:req.body}, (err, data) => {
+    if(!err){res.send(data);}
+    else{console.log('Error in User Update')}
   });
 }

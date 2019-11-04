@@ -97,6 +97,14 @@
         <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>Fill out your address</ng-template>
             <mat-form-field>
+                <mat-label>Select Address Type</mat-label>
+                <mat-select formControlName="addressType">
+                    <mat-option *ngFor="let addresses of addressTypes" [value]="addresses.value">
+                        {{addresses.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
                 <input matInput placeholder="Address" formControlName="address" required>
                 <mat-error
                     *ngIf="secondFormGroup.controls['address'].invalid && (secondFormGroup.controls['address'].dirty || secondFormGroup.controls['address'].touched)">
@@ -130,7 +138,7 @@
             </mat-form-field>
             <div>
                 <button mat-raised-button matStepperPrevious color="accent">Back</button>
-                <button mat-raised-button matStepperNext (click)="getDataUser()" color="primary"
+                <button mat-raised-button matStepperNext  color="primary"
                     [disabled]="secondFormGroup.invalid">Next</button>
             </div>
         </form>
@@ -148,11 +156,13 @@
             <mat-divider></mat-divider>
             <mat-list-item>Phone: {{dataAboutUser.phone}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Address type: {{dataAboutUser.address}}</mat-list-item>
+            <mat-list-item>Address type: {{dataAboutUser.addressType}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Address : {{dataAboutUser.address}}</mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item>City type: {{dataAboutUser.city}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>City type: {{dataAboutUser.country}}</mat-list-item>
+            <mat-list-item>Country : {{dataAboutUser.country}}</mat-list-item>
             <mat-divider></mat-divider>
         </mat-list>
         <div>

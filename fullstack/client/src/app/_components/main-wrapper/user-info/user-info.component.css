@@ -1,3 +1,17 @@
 table.w-100.mat-table.ng-star-inserted {
     width: 100%;
 }
+table.w-100.mat-table {
+    width: 100%;
+}
+.row-table:hover{
+    background-color: rgb(211, 211, 211);
+    cursor: pointer;
+}
+
+table.tableAddress.w-100.mat-table {
+    margin-top: 80px;
+}
+mat-form-field {
+    width: 100%;
+}

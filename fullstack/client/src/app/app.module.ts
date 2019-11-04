@@ -16,8 +16,8 @@ import { LoginPageComponent } from "./_components/login-page/login-page.componen
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RegisterPageComponent } from "./_components/register-page/register-page.component";
 
-import { FilterPipe } from './_components/main-wrapper/user-info/filter.pipe';
-import { UserDialogComponent } from './_components/main-wrapper/user-info/user-dialog/user-dialog.component'
+import { UserDialogComponent } from './_components/main-wrapper/user-info/user-dialog/user-dialog.component';
+import { UserDialogAddressComponent } from './_components/main-wrapper/user-info/user-dialog-address/user-dialog-address.component'
 
 
 @NgModule({
@@ -30,7 +30,7 @@ import { UserDialogComponent } from './_components/main-wrapper/user-info/user-d
     MainPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    FilterPipe,
+    UserDialogAddressComponent,
   ],
   imports: [
     NgbModule,
@@ -45,7 +45,8 @@ import { UserDialogComponent } from './_components/main-wrapper/user-info/user-d
   ],
   providers: [],
   entryComponents: [
-    UserDialogComponent
+    UserDialogComponent,
+    UserDialogAddressComponent
   ],
   bootstrap: [AppComponent]
 })

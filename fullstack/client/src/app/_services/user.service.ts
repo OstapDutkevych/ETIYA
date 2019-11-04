@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of,Subject } from "rxjs";
 import { UserCreate } from "../_models/userCreate";
+import { Addresses } from "../_models/userAddresses";
 import { catchError, tap } from "rxjs/operators";
 
 @Injectable({
@@ -9,7 +10,9 @@ import { catchError, tap } from "rxjs/operators";
 })
 export class UserService {
   private userUrl = "http://localhost:5000/app/main";
-  private deleteUserUrl = "http://localhost:5000/app/";
+  private deleteUserUrl = "http://localhost:5000/app/delete";
+  private updateUserUrl = "http://localhost:5000/app/update";
+  // private updateAddressUserUrl = "http://localhost:5000/app/update-address";
 
 
   httpOptions = {
@@ -22,7 +25,12 @@ export class UserService {
   }
   deleteUser(user: UserCreate): Observable<UserCreate> {
     const id = user._id;
-    const url = `${this.deleteUserUrl}/${id}`; // DELETE api/heroes/42
+    const url = `${this.deleteUserUrl}/${id}`; // DELETE 
     return this.http.get<UserCreate>(url, this.httpOptions);
+  }
+  updateUser(user:UserCreate): Observable<UserCreate>{
+    const id = user._id;
+    const url = `${this.updateUserUrl}/${id}`;
+    return this.http.put<UserCreate>(url, user, this.httpOptions);
   }
 }
