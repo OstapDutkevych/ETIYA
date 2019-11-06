@@ -2,10 +2,10 @@
     <h1 mat-dialog-title>{{ title }}</h1>
     <mat-dialog-content *ngIf="userAddressData">
         <ng-container *ngIf="action !== 'deleteUserAddress'; else sureToDelete">
-            <mat-form-field>
+            <!-- <mat-form-field>
                     <mat-label>ID</mat-label>
                     <input matInput formControlName="_id" type="text" readonly/>
-            </mat-form-field>
+            </mat-form-field> -->
             <mat-form-field>
                 <mat-label>Address type</mat-label>
                 <mat-select formControlName="addressType" required>

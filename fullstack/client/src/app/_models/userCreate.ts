@@ -1,7 +1,6 @@
 import { Addresses } from '../_models/userAddresses';
 export class UserCreate {
-  id:number;
-  _id: number;
+  _id:string;
   firstName: string;
   lastName: string;
   userName: string;
@@ -10,8 +9,4 @@ export class UserCreate {
   password: string;
   confirmPassword: string;
   addresses: Addresses[];
-  // addresses:[{addressType:string,country:string,city:string,address:string}];
-  // city: string;
-  // country: string;
-  // address: string;
 }

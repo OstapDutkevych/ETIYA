@@ -146,23 +146,23 @@
     <mat-step>
         <ng-template matStepLabel>All Data</ng-template>
         <mat-list>
-            <mat-list-item>Name: {{dataAboutUser.firstName}}</mat-list-item>
+            <mat-list-item>Name: {{firstFormGroup.get("firstName").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Surname: {{dataAboutUser.lastName}}</mat-list-item>
+            <mat-list-item>Surname: {{firstFormGroup.get("lastName").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Username: {{dataAboutUser.userName}}</mat-list-item>
+            <mat-list-item>Username: {{firstFormGroup.get("userName").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Email: {{dataAboutUser.email}}</mat-list-item>
+            <mat-list-item>Email: {{firstFormGroup.get("email").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Phone: {{dataAboutUser.phone}}</mat-list-item>
+            <mat-list-item>Phone: {{firstFormGroup.get("phone").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Address type: {{dataAboutUser.addressType}}</mat-list-item>
+            <mat-list-item>Address type: {{secondFormGroup.get("addressType").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Address : {{dataAboutUser.address}}</mat-list-item>
+            <mat-list-item>Address : {{secondFormGroup.get("address").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>City type: {{dataAboutUser.city}}</mat-list-item>
+            <mat-list-item>City type: {{secondFormGroup.get("city").value}}</mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item>Country : {{dataAboutUser.country}}</mat-list-item>
+            <mat-list-item>Country : {{secondFormGroup.get("country").value}}</mat-list-item>
             <mat-divider></mat-divider>
         </mat-list>
         <div>

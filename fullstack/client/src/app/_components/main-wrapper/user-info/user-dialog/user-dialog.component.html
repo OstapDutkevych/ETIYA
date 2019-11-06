@@ -4,67 +4,16 @@
     <ng-container *ngIf="action !== 'deleteUser'; else sureDelete">
       <div class="popupInput">
         <mat-form-field>
-          <input matInput formControlName="_id" placeholder="_id" readonly>
-        </mat-form-field>
-        <mat-form-field>
           <input matInput formControlName="firstName" placeholder="First Name" required>
-          <!-- <mat-error
-            *ngIf="popupGroup.controls['firstName'].invalid && (popupGroup.controls['firstName'].dirty || popupGroup.controls['firstName'].touched)">
-            <mat-error *ngIf="popupGroup.controls['firstName'].errors.required">
-              First Name is reqired!
-            </mat-error>
-            <mat-error *ngIf="popupGroup.controls['lastName'].errors.minlength">
-              First Name is too short!
-            </mat-error>
-          </mat-error> -->
         </mat-form-field>
         <mat-form-field>
           <input matInput formControlName="lastName" placeholder="Last Name" required>
-          <!-- <mat-error
-            *ngIf="popupGroup.controls['firstName'].invalid && (popupGroup.controls['lastName'].dirty || popupGroup.controls['lastName'].touched)">
-            <mat-error *ngIf="popupGroup.controls['lastName'].errors.required">
-              Last Name is reqired!
-            </mat-error>
-            <mat-error *ngIf="popupGroup.controls['lastName'].errors.minlength">
-              Last Name is too short!
-            </mat-error>
-          </mat-error> -->
         </mat-form-field>
         <mat-form-field>
           <input matInput formControlName="userName" placeholder="User Name" required>
-          <!-- <mat-error
-            *ngIf="popupGroup.controls['userName'].invalid && (popupGroup.controls['userName'].dirty || popupGroup.controls['userName'].touched)">
-            <mat-error *ngIf="popupGroup.controls['userName'].errors.required">
-              User Name is reqired!
-            </mat-error>
-            <mat-error *ngIf="popupGroup.controls['userName'].errors.minlength">
-              User Name is too short!
-            </mat-error>
-          </mat-error> -->
         </mat-form-field>
         <mat-form-field>
           <input matInput formControlName="phone" placeholder="Phone" required>
-          <!-- <mat-error
-            *ngIf="popupGroup.controls['phone'].invalid && (popupGroup.controls['phone'].dirty || popupGroup.controls['phone'].touched)">
-            <mat-error *ngIf="popupGroup.controls['phone'].errors.required">
-              Phone is reqired!
-            </mat-error>
-            <mat-error *ngIf="popupGroup.controls['phone'].errors.minlength">
-              Phone is too short!
-            </mat-error>
-          </mat-error> -->
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput formControlName="email" placeholder="email" required>
-          <!-- <mat-error
-            *ngIf="popupGroup.controls['email'].invalid && (popupGroup.controls['email'].dirty || popupGroup.controls['email'].touched)">
-            <mat-error *ngIf="popupGroup.controls['email'].errors.required">
-              Surname is reqired!
-            </mat-error>
-            <mat-error *ngIf="popupGroup.controls['email'].errors.minlength">
-              Surname is too short!
-            </mat-error>
-          </mat-error> -->
         </mat-form-field>
       </div>
     </ng-container>

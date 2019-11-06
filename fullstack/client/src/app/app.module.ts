@@ -5,7 +5,10 @@ import { HttpClientModule } from "@angular/common/http";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppMaterialModule } from "./material.module";
 import { MatDialogModule } from '@angular/material';
+import { NgxsModule } from '@ngxs/store';
 
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "../app/app.component";
 import { MainWrapperComponent } from "./_components/main-wrapper/main-wrapper.component";
@@ -42,6 +45,9 @@ import { UserDialogAddressComponent } from './_components/main-wrapper/user-info
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    NgxsModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [],
   entryComponents: [

@@ -2,6 +2,8 @@ const SaveUser = require("../models/saveUser");
 const errorHandler = require("../utils/errorHandler");
 var ObjectId = require("mongodb").ObjectID;
 module.exports.saveUser = async (req, res) => {
+  console.log(req.params)
+  console.log(req.body)
   const user = new SaveUser({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -10,6 +12,7 @@ module.exports.saveUser = async (req, res) => {
     email: req.body.email,
     addresses: [
       {
+        id:req.body.id,
         addressType: req.body.addressType,
         country: req.body.country,
         city: req.body.city,
@@ -46,6 +49,13 @@ module.exports.deleteUser = async (req, res) => {
 
 module.exports.updateUser = async (req, res) => {
   await SaveUser.findByIdAndUpdate(req.params.id,{$set:req.body}, (err, data) => {
+    if(!err){res.send(data);}
+    else{console.log('Error in User Update')}
+  });
+}
+
+module.exports.addAddress = async (req, res) => {
+  await SaveUser.findByIdAndUpdate(req.params.id,{$addToSet:req.body}, (err, data) => {
     if(!err){res.send(data);}
     else{console.log('Error in User Update')}
   });

@@ -8,4 +8,5 @@ router.get("/main", controller.getUser);
 router.get('/delete/:id', controller.deleteUser);
 
 router.put('/update/:id', controller.updateUser);
+router.put('/add-address/:id', controller.addAddress);
 module.exports = router;

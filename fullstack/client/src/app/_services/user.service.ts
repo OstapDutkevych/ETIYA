@@ -12,7 +12,6 @@ export class UserService {
   private userUrl = "http://localhost:5000/app/main";
   private deleteUserUrl = "http://localhost:5000/app/delete";
   private updateUserUrl = "http://localhost:5000/app/update";
-  // private updateAddressUserUrl = "http://localhost:5000/app/update-address";
 
 
   httpOptions = {
@@ -33,4 +32,5 @@ export class UserService {
     const url = `${this.updateUserUrl}/${id}`;
     return this.http.put<UserCreate>(url, user, this.httpOptions);
   }
+
 }

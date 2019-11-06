@@ -47,7 +47,7 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
     this.getCountry();
-    (this.firstFormGroup = this._formBuilder.group(
+    this.firstFormGroup = this._formBuilder.group(
       {
         firstName: new FormControl("", [
           Validators.required,
@@ -82,8 +82,8 @@ export class CreateUserComponent implements OnInit {
         confirmPassword: new FormControl("", [Validators.required])
       },
       { validator: MustMatch("password", "confirmPassword") }
-    )),
-      (this.secondFormGroup = this._formBuilder.group({
+    ),
+      this.secondFormGroup = this._formBuilder.group({
         id: new FormControl(0),
         addressType: new FormControl("", [Validators.required]),
         address: new FormControl("", [
@@ -95,28 +95,21 @@ export class CreateUserComponent implements OnInit {
           Validators.minLength(4)
         ]),
         country: new FormControl("", [Validators.required])
-      }));
+      });
   }
 
   saveCreateUser(): void {
-    const addresses: Addresses[] = [];
-    addresses.push(this.secondFormGroup.value);
-    // this.user = this.dataAboutUser;
-    // console.log(this.dataAboutUser)
-    // this.user.addresses[0].id = this.secondFormGroup.value.id;
-    // console.log(this.user.addresses[0].id)
-    // const test12 = this.user.addresses[0].id
-    // console.log(this.secondFormGroup.value.id)
-    this.dataAboutUser = {
+    const dataAboutUser = {
       ...this.firstFormGroup.value,
-      addresses
+      ...this.secondFormGroup.value
     };
-    console.log(this.dataAboutUser)
-    this.createUserService.createUser(this.dataAboutUser as UserCreate).subscribe(
+    this.user = dataAboutUser
+
+    this.createUserService.createUser(this.user).subscribe(
       user => {
         if (user) {
-          this.firstFormGroup.reset();
-          this.secondFormGroup.reset();
+            this.firstFormGroup.reset();
+            this.secondFormGroup.reset();
           this.router.navigate(["/app/main"]);
         }
       },

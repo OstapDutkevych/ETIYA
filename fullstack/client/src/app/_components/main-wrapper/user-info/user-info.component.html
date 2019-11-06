@@ -41,16 +41,7 @@
         <button mat-raised-button color="primary" type="submit">Find</button>
     </form>
 
-    <!-- <input name="firstName" type="text" placeholder="firstName" [(ngModel)]="nameSearch">
-        <input name="lastName" type="text" placeholder="lastName" [(ngModel)]="surnameSearch">
-        <input name="userName" type="text" placeholder="userName" [(ngModel)]="usernameSearch">
-        <input name="phone" type="text" placeholder="phone" [(ngModel)]="phoneSearch">
-        <input name="email" type="text" placeholder="email" [(ngModel)]="emailSearch">
-        <button mat-raised-button color="primary">Clear</button>
-        <button mat-raised-button color="primary">Find</button> -->
-
-
-    <table mat-table [dataSource]="allUsers" *ngIf = "allUsers" class="mat-elevation-z8 w-100">
+    <table mat-table [dataSource]="allUsers" *ngIf="allUsers" class="mat-elevation-z8 w-100">
         <ng-container matColumnDef="firstname">
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let user" (click)="selectUser(user)"> {{user.firstName}} </td>
@@ -84,7 +75,8 @@
 
 </div>
 <div>
-    <table mat-table [dataSource]="userAddresses" *ngIf = "userAddresses" #useraddresses class="tableAddress w-100 mat-elevation-z8">
+    <table mat-table [dataSource]="userAddresses" *ngIf="userAddresses" #useraddresses
+        class="tableAddress w-100 mat-elevation-z8">
         <ng-container matColumnDef="_id">
             <th mat-header-cell *matHeaderCellDef>id </th>
             <td mat-cell *matCellDef="let userAddresses"> {{userAddresses._id}} </td>

@@ -27,14 +27,13 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  addresses: [{
+  addresses : [{
+    id: Number,
     addressType:String,
-    country: String,
-    city: String,  
-    address: String 
-  } 
-
-]
+    address: String,
+    city: String,
+    country:String
+  }]
 });
 
 module.exports = mongoose.model("saveUser", userSchema);

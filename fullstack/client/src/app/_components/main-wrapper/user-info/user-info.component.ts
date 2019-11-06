@@ -1,13 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators
-} from "@angular/forms";
+import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { UserCreate } from "../../../_models/userCreate";
-import { User } from "../../../_models/user";
 import { Addresses } from "src/app/_models/userAddresses";
 import { UserService } from "../../../_services/user.service";
 import { UserDialogComponent } from "../user-info/user-dialog/user-dialog.component";
@@ -59,19 +53,23 @@ export class UserInfoComponent implements OnInit {
     });
   }
   getValueInput(formValue: any) {
-    // this.getUsers();
+    this.getUsers();
     const searchFilterData = formValue.value;
-    
+    console.log(searchFilterData);
+    console.log(this.users);
     this.users.filter(user => {
-        for (let key in searchFilterData){
-            if(searchFilterData[key].includes(user[key])){
-              let arr = [];
-              arr.push(user);
-              this.allUsers = arr;
-            }
+      console.log(user);
+      for (let key in searchFilterData) {
+        // if (searchFilterData[key].includes(user[key])) {
+        if (searchFilterData[key]!='' && searchFilterData[key].includes(user[key])) {
+         
+        console.log(user[key].search(searchFilterData) == -1)
+          let arr = [];
+          arr.push(user);
+          this.allUsers = arr;
         }
+      }
     });
-
   }
   searchInputReset() {
     this.searchInput.reset();
@@ -92,12 +90,15 @@ export class UserInfoComponent implements OnInit {
     user.userName = dataUser.userName;
     user.email = dataUser.email;
     user.phone = dataUser.phone;
-    this.userService.updateUser(user).subscribe(res => res, error => error);
+    this.userService
+      .updateUser(user)
+      .subscribe(res => console.log(res), error => error);
   }
 
   addUpdateUserAddress(dataUser: UserCreate): void {
     this.userService.updateUser(dataUser).subscribe(res => res, error => error);
   }
+
   deleteAddress(dataUser: UserCreate) {
     this.userService.updateUser(dataUser).subscribe(res => res, error => error);
   }
@@ -119,11 +120,8 @@ export class UserInfoComponent implements OnInit {
   }
   selectUser(user: UserCreate) {
     this.userAddresses = user.addresses;
-    console.log(this.userAddresses);
     this.selectedUser = user;
-    console.log(user);
   }
-
   openDialogUserAddress(action: string, userAddresses: Addresses[]) {
     const dialogRef = this.dialog.open(UserDialogAddressComponent, {
       width: "300px",
@@ -134,30 +132,25 @@ export class UserInfoComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(dataUserAddress => {
       if (dataUserAddress && action === "addUserAddress") {
-        console.log(dataUserAddress);
-        console.log(this.selectedUser);
+        dataUserAddress.id += this.selectedUser.addresses.length;
         this.selectedUser.addresses.push(dataUserAddress);
         this.addUpdateUserAddress(this.selectedUser);
-        // this.getUsers();
+        this.getUsers();
         this.table.renderRows();
       } else if (dataUserAddress && action === "updateUserAddress") {
-        this.selectedUser.addresses = dataUserAddress;
+        for (let key in this.selectedUser.addresses) {
+          if (this.selectedUser.addresses[key].id === dataUserAddress.id) {
+            this.selectedUser.addresses[key] = dataUserAddress;
+          }
+        }
         this.selectedUser;
         this.addUpdateUserAddress(this.selectedUser);
         this.table.renderRows();
       } else if (userAddresses && action === "deleteUserAddress") {
-        this.selectedUser.addresses.splice(dataUserAddress._id, 1);
+        this.selectedUser.addresses.splice(dataUserAddress.id, 1);
         this.deleteAddress(this.selectedUser);
         this.table.renderRows();
       }
     });
   }
-
-  // findItem(...arg){
-  //   for( let item in arg){
-  //     if(arg[item]){
-  //       this.bollean = true;
-  //     }
-  //     }
-  //   }
 }

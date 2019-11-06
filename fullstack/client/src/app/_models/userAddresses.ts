@@ -1,7 +1,8 @@
 export class Addresses {
-    id:number;
+    id: number;
     addressType: string;
     address: string;
     city: string;
     country: string;
+    _id:string;
 }

@@ -19,9 +19,9 @@ export class CreateUserService {
 
   constructor(private http: HttpClient) {}
 
-  createUser(user: UserCreate): Observable<UserCreate> {
+  createUser(user: any): Observable<any> {
     return this.http
-      .post<UserCreate>(this.createUserUrl, user, this.httpOptions)
+      .post<any>(this.createUserUrl, user, this.httpOptions)
       .pipe(catchError(this.handleError("createUser", user)));
   }
 
