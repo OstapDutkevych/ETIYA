@@ -1,5 +1,6 @@
 import { CreateUserService } from "../../../_services/create-user.service";
 import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngxs/store";
 import {
   FormGroup,
   FormBuilder,
@@ -11,7 +12,8 @@ import { Countries } from "../../../_models/country";
 import { Router } from "@angular/router";
 
 import { MustMatch } from "../../../helpers/must-match.validator";
-import { Addresses } from 'src/app/_models/userAddresses';
+import { CreateUser } from 'src/store/action/User.create.action';
+import { Navigate } from '@ngxs/router-plugin';
 
 export interface Country {
   value: string;
@@ -42,11 +44,12 @@ export class CreateUserComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private createUserService: CreateUserService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   ngOnInit() {
-    this.getCountry();
+    this.getCountry();  
     this.firstFormGroup = this._formBuilder.group(
       {
         firstName: new FormControl("", [
@@ -98,6 +101,24 @@ export class CreateUserComponent implements OnInit {
       });
   }
 
+  // saveCreateUser(): void {
+  //   const dataAboutUser = {
+  //     ...this.firstFormGroup.value,
+  //     ...this.secondFormGroup.value
+  //   };
+  //   this.user = dataAboutUser
+
+  //   this.createUserService.createUser(this.user).subscribe(
+  //     user => {
+  //       if (user) {
+  //           this.firstFormGroup.reset();
+  //           this.secondFormGroup.reset();
+  //         this.router.navigate(["/app/main"]);
+  //       }
+  //     },
+  //     err => err
+  //   );
+  // }
   saveCreateUser(): void {
     const dataAboutUser = {
       ...this.firstFormGroup.value,
@@ -105,12 +126,12 @@ export class CreateUserComponent implements OnInit {
     };
     this.user = dataAboutUser
 
-    this.createUserService.createUser(this.user).subscribe(
+   this.store.dispatch(new CreateUser(this.user)).subscribe(
       user => {
         if (user) {
             this.firstFormGroup.reset();
             this.secondFormGroup.reset();
-          this.router.navigate(["/app/main"]);
+            this.store.dispatch(new Navigate(["/app/main"]));
         }
       },
       err => err

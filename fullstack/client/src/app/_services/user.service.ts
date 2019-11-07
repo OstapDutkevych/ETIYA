@@ -32,5 +32,4 @@ export class UserService {
     const url = `${this.updateUserUrl}/${id}`;
     return this.http.put<UserCreate>(url, user, this.httpOptions);
   }
-
 }

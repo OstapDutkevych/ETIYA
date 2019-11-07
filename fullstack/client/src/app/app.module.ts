@@ -6,7 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppMaterialModule } from "./material.module";
 import { MatDialogModule } from '@angular/material';
 import { NgxsModule } from '@ngxs/store';
-
+import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppRoutingModule } from "./app-routing.module";
@@ -21,6 +21,9 @@ import { RegisterPageComponent } from "./_components/register-page/register-page
 
 import { UserDialogComponent } from './_components/main-wrapper/user-info/user-dialog/user-dialog.component';
 import { UserDialogAddressComponent } from './_components/main-wrapper/user-info/user-dialog-address/user-dialog-address.component'
+import { UserState } from "../store/state/User.state";
+import { CreateUserState } from "../store/state/user-create.state";
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 
 @NgModule({
@@ -45,9 +48,14 @@ import { UserDialogAddressComponent } from './_components/main-wrapper/user-info
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgxsModule.forRoot(),
+    NgxsModule.forRoot([
+      UserState,
+      CreateUserState
+    ]),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsResetPluginModule.forRoot()
   ],
   providers: [],
   entryComponents: [

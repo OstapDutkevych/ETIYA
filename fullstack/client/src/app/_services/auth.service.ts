@@ -27,6 +27,9 @@ export class AuthService {
       .post<User>(this.registerUrl, user, this.httpOptions)
       .pipe(catchError(this.handleError<User>("addHero")));
   }
+  logout(){
+    localStorage.removeItem("token");
+  }
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       console.log(error.message);

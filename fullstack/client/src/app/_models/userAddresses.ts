@@ -1,4 +1,4 @@
-export class Addresses {
+export interface Addresses {
     id: number;
     addressType: string;
     address: string;

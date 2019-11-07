@@ -18,16 +18,17 @@ module.exports.loginUser = async (req, res) => {
         keys.jwt,
         { expiresIn: 60 * 60 }
       );
-
       res.status(200).json({
-        token: `Baerer ${token}`
+        token: `Baerer ${token}`,
+        ...req.body
+
       });
     } else {
       res.status(401).json({ message: "Password wrong ! Please try again" });
     }
   } else {
     res.status(404).json({
-      message: "User not found"
+      message: "User not found" 
     });
   }
 };

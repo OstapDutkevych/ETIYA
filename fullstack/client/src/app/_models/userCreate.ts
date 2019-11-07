@@ -1,5 +1,5 @@
 import { Addresses } from '../_models/userAddresses';
-export class UserCreate {
+export interface UserCreate {
   _id:string;
   firstName: string;
   lastName: string;

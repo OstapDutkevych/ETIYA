@@ -1,3 +1,3 @@
-export class Countries {
+export interface Countries {
     name: string
 }
