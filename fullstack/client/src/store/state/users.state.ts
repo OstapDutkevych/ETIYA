@@ -1,7 +1,8 @@
 import { State, Action, StateContext } from "@ngxs/store";
 import { UserCreate } from "../../app/_models/userCreate";
-import { CreateUser } from "../action/User.create.action";
+import { CreateUser, GetAllUserName } from "../action/users";
 import { CreateUserService } from "src/app/_services/create-user.service";
+import { UserService } from "src/app/_services/user.service";
 import { tap } from 'rxjs/operators';
 
 
@@ -21,13 +22,20 @@ import { tap } from 'rxjs/operators';
 })
 
 export class CreateUserState {
-  constructor(private createUserService: CreateUserService) {}
+  constructor(private createUserService: CreateUserService,
+    private userService: UserService) {}
   @Action(CreateUser)
-  CreateUserState(ctx: StateContext<UserCreate>, { payload }: CreateUser) {
+  create(ctx: StateContext<UserCreate>, { payload }: CreateUser) {
     return this.createUserService.createUser(payload).pipe(
       tap(res => {
         ctx.patchState(res);
       })
     );
   }
+
+  @Action(GetAllUserName)
+  get() {
+    return this.userService.getUsers();
+  }
 }
+

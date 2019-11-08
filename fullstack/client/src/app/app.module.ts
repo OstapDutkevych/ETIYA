@@ -22,7 +22,7 @@ import { RegisterPageComponent } from "./_components/register-page/register-page
 import { UserDialogComponent } from './_components/main-wrapper/user-info/user-dialog/user-dialog.component';
 import { UserDialogAddressComponent } from './_components/main-wrapper/user-info/user-dialog-address/user-dialog-address.component'
 import { UserState } from "../store/state/User.state";
-import { CreateUserState } from "../store/state/user-create.state";
+import { CreateUserState } from "../store/state/users.state";
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 

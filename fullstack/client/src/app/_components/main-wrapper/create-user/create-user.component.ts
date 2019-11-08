@@ -12,7 +12,7 @@ import { Countries } from "../../../_models/country";
 import { Router } from "@angular/router";
 
 import { MustMatch } from "../../../helpers/must-match.validator";
-import { CreateUser } from 'src/store/action/User.create.action';
+import { CreateUser } from 'src/store/action/users';
 import { Navigate } from '@ngxs/router-plugin';
 
 export interface Country {
