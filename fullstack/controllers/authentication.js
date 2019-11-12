@@ -28,7 +28,7 @@ module.exports.loginUser = async (req, res) => {
     }
   } else {
     res.status(404).json({
-      message: "User not found" 
+      message: "User not found"
     });
   }
 };

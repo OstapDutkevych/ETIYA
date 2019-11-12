@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy
+} from "@angular/core";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { UserCreate } from "../../../_models/userCreate";
@@ -7,8 +12,13 @@ import { UserService } from "../../../_services/user.service";
 import { UserDialogComponent } from "../user-info/user-dialog/user-dialog.component";
 import { UserDialogAddressComponent } from "./user-dialog-address/user-dialog-address.component";
 import { MatTable } from "@angular/material";
+import { Store, Select } from "@ngxs/store";
+import { getAllUsers, AddUserAddress } from "src/store/action/users.action";
+import { CreateUserState } from "src/store/state/users.state";
+import { Observable } from "rxjs";
 @Component({
   selector: "app-user-info",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./user-info.component.html",
   styleUrls: ["./user-info.component.css"]
 })
@@ -21,6 +31,7 @@ export class UserInfoComponent implements OnInit {
   users: UserCreate[] = [];
   allUsers: UserCreate[];
   firstname: string;
+
   displayedColumnsUser = [
     "firstname",
     "lastname",
@@ -36,10 +47,14 @@ export class UserInfoComponent implements OnInit {
     "country",
     "actions"
   ];
+
+  @Select(CreateUserState.getUsers) usersList: Observable<UserCreate[]>;
+
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public store: Store
   ) {}
 
   ngOnInit() {
@@ -51,19 +66,18 @@ export class UserInfoComponent implements OnInit {
       phone: new FormControl(""),
       email: new FormControl("")
     });
+    this.usersList.subscribe(users => (this.users = users));
   }
   getValueInput(formValue: any) {
     this.getUsers();
     const searchFilterData = formValue.value;
-    console.log(searchFilterData);
-    console.log(this.users);
     this.users.filter(user => {
-      console.log(user);
       for (let key in searchFilterData) {
-        // if (searchFilterData[key].includes(user[key])) {
-        if (searchFilterData[key]!='' && searchFilterData[key].includes(user[key])) {
-         
-        console.log(user[key].search(searchFilterData) == -1)
+        if (
+          searchFilterData[key] != "" &&
+          searchFilterData[key].includes(user[key])
+        ) {
+          user[key].search(searchFilterData) == -1;
           let arr = [];
           arr.push(user);
           this.allUsers = arr;
@@ -74,10 +88,9 @@ export class UserInfoComponent implements OnInit {
   searchInputReset() {
     this.searchInput.reset();
   }
+
   getUsers() {
-    this.userService
-      .getUsers()
-      .subscribe(users => (this.users = users), err => err);
+    this.store.dispatch(new getAllUsers());
   }
 
   deleteUser(user: UserCreate): void {
@@ -90,19 +103,16 @@ export class UserInfoComponent implements OnInit {
     user.userName = dataUser.userName;
     user.email = dataUser.email;
     user.phone = dataUser.phone;
+
     this.userService
       .updateUser(user)
       .subscribe(res => console.log(res), error => error);
   }
 
-  addUpdateUserAddress(dataUser: UserCreate): void {
-    this.userService.updateUser(dataUser).subscribe(res => res, error => error);
+  selectUser(user: UserCreate) {
+    this.userAddresses = user.addresses;
+    this.selectedUser = user;
   }
-
-  deleteAddress(dataUser: UserCreate) {
-    this.userService.updateUser(dataUser).subscribe(res => res, error => error);
-  }
-
   openDialog(action: string, user: UserCreate) {
     const dialogRef = this.dialog.open(UserDialogComponent, {
       data: {
@@ -118,10 +128,6 @@ export class UserInfoComponent implements OnInit {
       }
     });
   }
-  selectUser(user: UserCreate) {
-    this.userAddresses = user.addresses;
-    this.selectedUser = user;
-  }
   openDialogUserAddress(action: string, userAddresses: Addresses[]) {
     const dialogRef = this.dialog.open(UserDialogAddressComponent, {
       width: "300px",
@@ -134,7 +140,9 @@ export class UserInfoComponent implements OnInit {
       if (dataUserAddress && action === "addUserAddress") {
         dataUserAddress.id += this.selectedUser.addresses.length;
         this.selectedUser.addresses.push(dataUserAddress);
-        this.addUpdateUserAddress(this.selectedUser);
+        this.store
+          .dispatch(new AddUserAddress(this.selectedUser))
+          .subscribe(res => console.log(res), error => error);
         this.getUsers();
         this.table.renderRows();
       } else if (dataUserAddress && action === "updateUserAddress") {
@@ -143,13 +151,19 @@ export class UserInfoComponent implements OnInit {
             this.selectedUser.addresses[key] = dataUserAddress;
           }
         }
-        this.selectedUser;
-        this.addUpdateUserAddress(this.selectedUser);
+        this.store
+          .dispatch(new AddUserAddress(this.selectedUser))
+          .subscribe(res => console.log(res), error => error);
         this.table.renderRows();
-      } else if (userAddresses && action === "deleteUserAddress") {
-        this.selectedUser.addresses.splice(dataUserAddress.id, 1);
-        this.deleteAddress(this.selectedUser);
+      } else if (dataUserAddress && action === "deleteUserAddress") {
+        this.selectedUser.addresses = this.selectedUser.addresses.filter(
+          address => address.id !== dataUserAddress.id
+        );
         this.table.renderRows();
+        this.store
+          .dispatch(new AddUserAddress(this.selectedUser))
+          .subscribe(res => console.log(res), error => error);
+        
       }
     });
   }

@@ -4,29 +4,34 @@ import { LoginUser, LogoutUser } from "../action/User.action";
 import { AuthService } from "src/app/_services/auth.service";
 import { take, tap } from "rxjs/operators";
 import { state } from "@angular/animations";
-@State<User>({
-  name: "user",
-  defaults: {
+
+export class LoginUserModalState {
+  user: User = {
     id: null,
     email: "",
     password: "",
     token: ""
+  };
+}
+@State<LoginUserModalState>({
+  name: "userState",
+  defaults: {
+    user: null
   }
 })
 export class UserState {
   constructor(private authService: AuthService) {}
   @Action(LoginUser)
-  LoginUser(ctx: StateContext<User>, { payload }: LoginUser) {
+  loginUser(ctx: StateContext<LoginUserModalState>, { payload }: LoginUser) {
     return this.authService.loginData(payload).pipe(
       tap(res => {
-        ctx.patchState(res);
+        ctx.patchState({ ...ctx, user: res });
       })
     );
   }
 
-
- @Action(LogoutUser)
- LogoutUser() {
-        this.authService.logout();
-    }
+  @Action(LogoutUser)
+  LogoutUser() {
+    this.authService.logout();
+  }
 }

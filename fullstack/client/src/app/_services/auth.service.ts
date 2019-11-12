@@ -32,7 +32,6 @@ export class AuthService {
   }
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
-      console.log(error.message);
       return throwError(error);
     };
   }

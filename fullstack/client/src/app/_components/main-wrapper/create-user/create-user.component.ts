@@ -12,7 +12,7 @@ import { Countries } from "../../../_models/country";
 import { Router } from "@angular/router";
 
 import { MustMatch } from "../../../helpers/must-match.validator";
-import { CreateUser } from 'src/store/action/users';
+import { CreateUser } from 'src/store/action/users.action';
 import { Navigate } from '@ngxs/router-plugin';
 
 export interface Country {
@@ -101,24 +101,6 @@ export class CreateUserComponent implements OnInit {
       });
   }
 
-  // saveCreateUser(): void {
-  //   const dataAboutUser = {
-  //     ...this.firstFormGroup.value,
-  //     ...this.secondFormGroup.value
-  //   };
-  //   this.user = dataAboutUser
-
-  //   this.createUserService.createUser(this.user).subscribe(
-  //     user => {
-  //       if (user) {
-  //           this.firstFormGroup.reset();
-  //           this.secondFormGroup.reset();
-  //         this.router.navigate(["/app/main"]);
-  //       }
-  //     },
-  //     err => err
-  //   );
-  // }
   saveCreateUser(): void {
     const dataAboutUser = {
       ...this.firstFormGroup.value,

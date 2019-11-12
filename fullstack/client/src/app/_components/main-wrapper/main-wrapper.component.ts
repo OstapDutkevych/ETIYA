@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from '../../_services/user.service'
 import { Store } from '@ngxs/store';
 import { LogoutUser } from 'src/store/action/User.action';
 import { StateClear } from 'ngxs-reset-plugin';
@@ -11,7 +10,6 @@ import { Navigate } from '@ngxs/router-plugin';
 })
 export class MainWrapperComponent implements OnInit {
   constructor(
-    private userService: UserService,
     private store: Store
   ) {}
 

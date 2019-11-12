@@ -1,5 +1,5 @@
 <ng-container>
-    <mat-list *ngFor="let user of users">
+    <mat-list *ngFor="let user of userList | async">
         <mat-list-item>User {{user.firstName + ' ' + user.lastName}} </mat-list-item>
         <mat-divider></mat-divider>
     </mat-list>

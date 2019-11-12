@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../../_services/user.service";
 import { UserCreate } from "../../../_models/userCreate";
 import { Store, Select } from "@ngxs/store";
-import { GetAllUserName } from 'src/store/action/users';
+import { getAllUsers, CreateUser } from 'src/store/action/users.action';
 import { CreateUserState } from '../../../../store/state/users.state'
 import { Observable } from 'rxjs';
 
@@ -12,18 +12,15 @@ import { Observable } from 'rxjs';
   styleUrls: ["./main-page.component.css"]
 })
 export class MainPageComponent implements OnInit {
-  @Select(CreateUserState) animals$: Observable<string[]>;
-  
+@Select(CreateUserState.getUsers) userList: Observable<CreateUser[]>;
   users: UserCreate[] = [];
   constructor(private userService: UserService, public store: Store) {}
 
   ngOnInit() {
     this.getUsers();
   }
-  // getUsers() {
-  //   this.userService.getUsers().subscribe(users => (this.users = users));
-  // }
+
   getUsers() {
-    this.store.dispatch(new GetAllUserName());
+    this.store.dispatch(new getAllUsers());
   }
 }

@@ -35,11 +35,8 @@ export class LoginPageComponent implements OnInit {
     if (!this.user) {
       return;
     }
-    debugger;
     this.store.dispatch(new LoginUser(this.user)).subscribe(
       res => {
-        console.log(res);
-        debugger;
         JSON.stringify(res), this.store.dispatch(new Navigate(["/app/main"]));
 
       },
